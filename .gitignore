@@ -39,3 +39,89 @@ dict1 = dict() # Empty dict
 dict1["Name"] = "Sathish" # Inserting keys and values to dict
 dict1["School"] = "SCOPE"
 print(dict1) # Display dict
+
+HEALTHCARE SYSTEM:
+medical_db = {
+"patients": [] # List of dicts; each dict = one patient record
+}
+def add_patient():
+print("\n--- Enter New Patient Details ---")
+name = input("Patient Name: ").strip()
+age = input("Age: ").strip()
+gender = input("Gender: ").strip()
+symptoms_input = input("Enter symptoms (comma separated): ").strip()
+symptoms = [s.strip() for s in symptoms_input.split(",") if s.strip()] or []
+diagnoses_input = input("Enter diagnoses (comma separated): ").strip()
+diagnoses = [d.strip() for d in diagnoses_input.split(",") if d.strip()] or [
+medications_input = input("Enter medications (comma separated): ").strip()
+medications = [m.strip() for m in medications_input.split(",") if m.strip()]
+patient_id = len(medical_db["patients"]) + 1
+patient = {
+"id": patient_id,
+"name": name,
+"age": age,
+"gender": gender,
+"symptoms": symptoms,
+"diagnoses": diagnoses,
+"medications": medications
+}
+medical_db["patients"].append(patient)
+print(f"\n Patient {name} added successfully!\n")
+def find_patient_by_name():
+name = input("\nEnter patient name to search: ").strip()
+found = [p for p in medical_db["patients"] if p["name"].lower() == name.lower
+if not found:
+print("No patient found with that name.\n")
+else:
+print("Patient(s) found:\n")
+for p in found:
+print(p)
+def list_all_diagnoses():
+print("\n--- All Diagnoses ---")
+for patient in medical_db["patients"]:
+diagnoses = patient.get("diagnoses", [])
+if diagnoses:
+print(f"{patient['name']}: {', '.join(diagnoses)}")
+else:
+print(f"{patient['name']}: No diagnoses recorded.")
+def show_last_four_patients():
+print("\n--- Last 4 Patients ---")
+for patient in medical_db["patients"][-4:]:
+print(patient)
+def unpack_first_patient():
+if not medical_db["patients"]:
+print("No patient to unpack.\n")
+return
+patient = medical_db["patients"][0]
+id_, name, age, gender = patient["id"], patient["name"], patient["age"], pati
+print(f"\n--- Sequence Unpacking ---")
+print(f"ID: {id_}, Name: {name}, Age: {age}, Gender: {gender}")
+def main_menu():
+while True:
+print("\n====== Medical Database Menu ======")
+print("1. Add new patient")
+print("2. Find patient by name")
+print("3. List all diagnoses")
+print("4. Show last 4 patient entries")
+print("5. Unpack first patient record")
+i t("6 E it")
+8/15/25, 8:33 PM Lab_activity_6_22MID0160_teamproject.ipynb - Colab
+https://colab.research.google.com/drive/1eN89vpMBj8l3Mqd3fe_RTBshwni5WRIs#printMode=true 1/3
+print("6. Exit")
+choice = input("Enter your choice (1-6): ").strip()
+if choice == "1":
+add_patient()
+elif choice == "2":
+find_patient_by_name()
+elif choice == "3":
+list_all_diagnoses()
+elif choice == "4":
+show_last_four_patients()
+elif choice == "5":
+unpack_first_patient()
+elif choice == "6":
+print("Exiting Medical DB. Bye!")
+break
+else:
+print("Invalid choice. Please enter a number from 1 to 6.")
+main_menu()
